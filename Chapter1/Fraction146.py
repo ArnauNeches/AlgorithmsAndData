@@ -12,40 +12,49 @@ class Fraction:
 
     def __init__(self,top,bottom):
         #Constructor
-        self.num = top
-        self.den = bottom
+        if type(top) != int or type(bottom) != int:
+            raise TypeError("Invalid type")
+        if bottom == 0:
+            raise ZeroDivisionError("Denominator can´t be zero")
+        
+        if bottom < 0:
+            bottom = abs(bottom)
+            top = -top
+        
+        common = gcd(top, bottom)
+        self.num = top // common
+        self.den = bottom // common
 
-    def __str__ (self):
+    def __str__(self):
         #ToString
         return str(self.num) + "/" + str(self.den)
+    
+    def __repr__(self):
+        return "Fraction("+self.num+","+self.den+")"
 
     def __add__(self, other):
         #Add function
         new_num = self.num*other.den + self.den*other.num
         new_den = self.den * other.den
-        common = gcd(new_num, new_den)
-        return Fraction(new_num // common, new_den // common)
+        return Fraction(new_num, new_den)
     
     def __sub__(self, other):
         #Substract function
         new_num = self.num*other.den - self.den*other.num
         new_den = self.den * other.den
-        common = gcd(new_num, new_den)
-        return Fraction(new_num // common, new_den // common)       
+        return Fraction(new_num, new_den)       
     
     def __mul__(self, other):
         #Multiply function
         new_num = self.num * other.num
         new_den = self.den * other.den
-        common = gcd(new_num, new_den)
-        return Fraction(new_num // common, new_den // common)
+        return Fraction(new_num, new_den)
 
     def __truediv__(self, other):
         #Division function
         new_num = self.num * other.den
         new_den = self.den * other.num
-        common = gcd(new_num, new_den)
-        return Fraction(new_num // common, new_den // common)        
+        return Fraction(new_num, new_den)        
 
     def __eq__(self, other):
         #Equality
@@ -63,7 +72,23 @@ class Fraction:
         #Greater (>) operator
         first_num = self.num * other.den
         second_num = other.num * self.den
-        return first_num > second_num   
+        return first_num > second_num  
+
+    def __radd__(self, other):
+        new_num = self.num*other.den + self.den*other.num
+        new_den = self.den * other.den
+        return Fraction(new_num, new_den) 
+    
+    def __iadd__(self, other):
+        new_num = self.num*other.den + self.den*other.num
+        new_den = self.den * other.den
+        return Fraction(new_num, new_den) 
+    
+    def get_num(self):
+        return self.num
+    
+    def get_den(self):
+        return self.den
 
 f1 = Fraction(3,5)
 f2 = Fraction(1,2)
@@ -75,4 +100,5 @@ print(f1*f2)
 print(f1/f2)
 print(f1==f2)
 print(f1<f2)
-print(f1>f2)     
+print(f1>f2)  
+f3= Fraction("x", "s")   
