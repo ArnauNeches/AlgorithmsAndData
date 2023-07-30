@@ -18,6 +18,6 @@ def sum_of_n2(n):
     t = time.time()-s
     print(f"The sum of the {n} first numbers is {res} and it took {t:.15f} seconds")
 
-sum_of_n(10000000)
-sum_of_n2(10000000)
+sum_of_n(1000000)
+sum_of_n2(1000000)
 
