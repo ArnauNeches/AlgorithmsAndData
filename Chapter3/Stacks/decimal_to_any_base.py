@@ -17,7 +17,8 @@ def base_converter(dec_number, base):
     
     return new_string
 
-print(base_converter(25, 8))
-print(base_converter(256, 16))
-print(base_converter(26, 26)) #This one works but the conversor doesn't work for a base higher than 16 always
+if __name__ == "__main__":
+    print(base_converter(25, 8))
+    print(base_converter(256, 16))
+    print(base_converter(26, 26)) #This one works but the conversor doesn't work for a base higher than 16 always
 

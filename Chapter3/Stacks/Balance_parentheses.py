@@ -21,4 +21,5 @@ def par_checker(symbol_string):
  else:
     return False
  
-print(par_checker('()(())'))
+if __name__ == "__main__": 
+   print(par_checker('()(())'))
