@@ -23,9 +23,12 @@ def do_math(op, op1, op2):
         return op1 / op2
     elif op == "+":
         return op1 + op2
-    else:
+    elif op == "-":
         return op1 - op2
+    elif op == "^":
+        return op1 ** op2
     
 if __name__ == "__main__":
     print(postfix_eval('7 8 + 3 2 + /'))
     print(postfix_eval('2 5 * 4 7 + +'))
+    print(postfix_eval("5 3 4 2 - ^ *"))

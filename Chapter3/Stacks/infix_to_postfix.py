@@ -3,6 +3,7 @@ from Stack import Stack
 
 def infix_to_postfix(infix_expr):
     prec = {}
+    prec["^"] = 4
     prec["*"] = 3
     prec["/"] = 3
     prec["+"] = 2
@@ -34,4 +35,5 @@ def infix_to_postfix(infix_expr):
 
 if __name__ == "__main__":
     print(infix_to_postfix("A * B + C * D"))
-    print(infix_to_postfix("( A + B ) * C - ( D - E ) * ( F + G )"))    
+    print(infix_to_postfix("( A + B ) * C - ( D - E ) * ( F + G )")) 
+    print(infix_to_postfix("5 * 3 ^ ( 4 - 2 )"))  
