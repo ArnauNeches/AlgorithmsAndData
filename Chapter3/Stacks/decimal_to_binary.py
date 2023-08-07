@@ -15,4 +15,8 @@ def divide_by_2(dec_number):
     
     return bin_string
 
-print(divide_by_2(345))
+if __name__ == "__main__":
+    print(divide_by_2(345))
+    print(divide_by_2(17))
+    print(divide_by_2(45))
+    print(divide_by_2(96))

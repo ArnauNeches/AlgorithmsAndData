@@ -8,11 +8,13 @@ def postfix_eval(postfic_expr):
     for token in token_list:
         if token in "0123456789":
             operand_stack.push(int(token))
-        else:
+        elif token in "+*^-/":
             operand2 = operand_stack.pop()
             operand1 = operand_stack.pop()
             result = do_math(token, operand1, operand2)
             operand_stack.push(result)
+        else: 
+            raise ValueError("Invalid value in the expression")
         
     return operand_stack.pop()
     
@@ -32,3 +34,4 @@ if __name__ == "__main__":
     print(postfix_eval('7 8 + 3 2 + /'))
     print(postfix_eval('2 5 * 4 7 + +'))
     print(postfix_eval("5 3 4 2 - ^ *"))
+    print(postfix_eval("1 2 3 4 5 * + * +"))

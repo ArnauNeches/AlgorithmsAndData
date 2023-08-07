@@ -19,6 +19,7 @@ class UnorderedList:
     def __init__(self):
         self.head = None
         self.tail = None
+        self.length = 0
 
     def is_empty(self):
         return self.head == None
@@ -27,17 +28,13 @@ class UnorderedList:
         temp = Node(item)
         temp.set_next(self.head)
         self.head = temp
+        self.length += 1
 
         if self.tail == None:
             self.tail = temp
 
     def size(self):
-        current = self.head
-        count = 0
-        while current != None:
-            count = count + 1
-            current = current.get_next()
-        return count
+        return self.length
     
     def search(self,item):
         current = self.head
@@ -62,11 +59,14 @@ class UnorderedList:
         
         if previous == None:
             self.head == current.get_next()
+            self.length -= 1
         else:
             previous.set_next(current.get_next)
+            self.length -= 1
 
     def append(self, item):
         temp = Node(item)
+        self.length += 1
         
         if self.is_empty():
             self.head = temp
@@ -92,7 +92,7 @@ class UnorderedList:
 
     def insert(self, index, item):
         temp = Node(item)
-
+        self.length += 1
         if index <= 0 or self.head is None:
             temp.set_next(self.head)
             self.head = temp
@@ -133,27 +133,8 @@ class UnorderedList:
         else:
             previous.set_next(None)
             self.tail = previous
-
-        return current.get_data()
-    
-    def pop(self):
-        if self.head is None:
-            raise IndexError("pop from empty list")
-
-        current = self.head
-        previous = None
-
-        while current.get_next() is not None:
-            previous = current
-            current = current.get_next()
-
-        if previous is None:
-            self.head = None
-            self.tail = None
-        else:
-            previous.set_next(None)
-            self.tail = previous
-
+        
+        self.length -= 1
         return current.get_data()
 
     def pop(self, index=None):
@@ -168,6 +149,7 @@ class UnorderedList:
             self.head = self.head.get_next()
             if self.head is None:
                 self.tail = None
+            self.length -= 1
             return data
 
         current = self.head
@@ -188,6 +170,7 @@ class UnorderedList:
         if current == self.tail:
             self.tail = previous
 
+        self.length -= 1
         return data
 
 
@@ -200,3 +183,6 @@ if __name__ == "__main__":
     nlist.append(1)
     nlist.add(5)
     print(nlist.index(5))
+    nlist.pop(0)
+    nlist.add(23)
+    print(nlist.size())

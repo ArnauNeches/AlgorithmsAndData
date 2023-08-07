@@ -23,10 +23,12 @@ def infix_to_postfix(infix_expr):
             while top_token != "(":
                 postfix_list.append(top_token)
                 top_token = op_stack.pop()
-        else:
+        elif token in "+*^-/":
             while (not op_stack.is_empty()) and (prec[op_stack.peek()] >= prec[token]):
                 postfix_list.append(op_stack.pop())
             op_stack.push(token)
+        else:
+            raise ValueError("Invalid value in the expression")
 
     while not op_stack.is_empty():
         postfix_list.append(op_stack.pop())
@@ -37,3 +39,6 @@ if __name__ == "__main__":
     print(infix_to_postfix("A * B + C * D"))
     print(infix_to_postfix("( A + B ) * C - ( D - E ) * ( F + G )")) 
     print(infix_to_postfix("5 * 3 ^ ( 4 - 2 )"))  
+    print(infix_to_postfix("( A + B ) * ( C + D ) * ( E + F )"))
+    print(infix_to_postfix("A + ( ( B + C ) * ( D + E ) )"))
+    print(infix_to_postfix("A + ( ( B ´ C ) * ( D + E ) )"))
