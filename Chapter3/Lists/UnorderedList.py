@@ -20,6 +20,15 @@ class UnorderedList:
         self.head = None
         self.tail = None
         self.length = 0
+    
+    def __str__(self):
+        current = self.head
+        res = "["
+        while current != None:
+            res = res + str(current.get_data()) + " "
+            current = current.get_next()
+        res = res + "]"
+        return res
 
     def is_empty(self):
         return self.head == None
@@ -116,6 +125,22 @@ class UnorderedList:
                 previous.set_next(temp)
                 temp.set_next(current)
     
+    def slice(self, start, end):
+        new_list = UnorderedList()
+        counter = 0
+        current = self.head
+        
+        while counter < start:
+            current = current.get_next()
+            counter += 1
+        
+        while counter < end:
+            new_list.append(current.get_data())
+            current = current.get_next()
+            counter += 1
+        
+        return new_list
+
     def pop(self):
         if self.head is None:
             raise IndexError("pop from empty list")
@@ -178,11 +203,12 @@ class UnorderedList:
 
 if __name__ == "__main__":
     nlist = UnorderedList()
+    nlist.add(1)
+    nlist.add(2)
     nlist.add(3)
-    nlist.add(7)
-    nlist.append(1)
+    nlist.add(4)
     nlist.add(5)
-    print(nlist.index(5))
-    nlist.pop(0)
-    nlist.add(23)
-    print(nlist.size())
+    nlist.add(6)
+    print(nlist)
+    mlist = nlist.slice(0,3)
+    print(mlist)
